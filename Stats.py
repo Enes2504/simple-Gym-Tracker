@@ -6,11 +6,6 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-if "connections" in st.secrets and "gsheets" in st.secrets["connections"]:
-    if "private_key" in st.secrets["connections"]["gsheets"]:
-        orig_key = st.secrets["connections"]["gsheets"]["private_key"]
-        st.secrets["connections"]["gsheets"]["private_key"] = orig_key.replace("\\n", "\n")
-
 st.title("Your Personal Gym Tracker")
 
 user_n = st.text_input("Enter your name:", "").strip().lower()
