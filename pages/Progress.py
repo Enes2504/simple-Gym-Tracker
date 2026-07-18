@@ -22,7 +22,8 @@ if rawdata is not None and not rawdata.empty:
     rawdata["timestamp"] = pd.to_datetime(rawdata["timestamp"])
     rawdata = rawdata.sort_values("timestamp", ascending = True)
     rawdata["text"] = rawdata["text"].str.strip()
-    rawdata["kg"] = pd.to_numeric(rawdata["kg"])
+    rawdata["kg"] = pd.to_numeric(rawdata["kg"], errors='coerce')
+    rawdata = rawdata.dropna(subset=["kg"])
     user_data = rawdata[rawdata["name"] == user_n]
     if not user_data.empty:
 
