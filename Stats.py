@@ -8,11 +8,12 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 st.title("Your Personal Gym Tracker")
 
+connect = st.connection("gsheets", type=GSheetsConnection)
+
 user_n = st.text_input("Enter your name:", "").strip().lower()
 
 if user_n:
     st.session_state["logged_in_user"] = user_n
-    connect = st.connection("gsheets", type=GSheetsConnection)
     rawdata = connect.read(ttl=0)
     if user_n == "emanuele" or user_n == "emin" or user_n == "altin" or user_n == "armin":
         st.write(f"***Stark {user_n} Welche Maschine Hast du jz wieder auseinander genommen? :) - Dein Enes***")
